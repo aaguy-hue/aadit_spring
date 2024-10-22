@@ -86,6 +86,16 @@ public class CSASynergyController {
         return "redirect:/mvc/csa-synergy/view-grades";  // Redirect back to the grades view
     }
 
+    // @PostMapping("/submit-grade-request")
+    // public String submitGradeRequest(
+    //     @RequestParam Integer assignmentId, 
+    //     @RequestParam Integer studentId,
+    //     @RequestParam Integer authorId,
+    //     @RequestParam 
+    // ) {
+
+    // }
+
     private boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
