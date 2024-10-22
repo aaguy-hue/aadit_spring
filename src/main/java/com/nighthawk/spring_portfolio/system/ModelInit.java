@@ -16,6 +16,9 @@ import com.nighthawk.spring_portfolio.mvc.person.PersonRole;
 import com.nighthawk.spring_portfolio.mvc.person.PersonRoleJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.announcement.Announcement;
 import com.nighthawk.spring_portfolio.mvc.announcement.AnnouncementJPA;
+import com.nighthawk.spring_portfolio.mvc.csa_synergy.Assignment;
+import com.nighthawk.spring_portfolio.mvc.csa_synergy.AssignmentJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.csa_synergy.GradeJpaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,6 +33,8 @@ public class ModelInit {
     @Autowired PersonRoleJpaRepository roleJpaRepository;
     @Autowired PersonDetailsService personDetailsService;
     @Autowired AnnouncementJPA announcementJPA;
+    @Autowired AssignmentJpaRepository assignmentJpaRepository;
+    @Autowired GradeJpaRepository gradeJpaRepository;
 
     @Bean
     @Transactional
@@ -86,6 +91,14 @@ public class ModelInit {
                 }
             }
 
+            // Assignment database is populated with sample assignments
+            Assignment[] assignmentArray = Assignment.init();
+            for (Assignment assignment : assignmentArray) {
+                Assignment assignmentFound = assignmentJpaRepository.findByName(assignment.getName());
+                if (assignmentFound == null) { // if the assignment doesn't exist
+                    assignmentJpaRepository.save(new Assignment(assignment.getName(), assignment.getDetails()));
+                }
+            }
         };
     }
 }

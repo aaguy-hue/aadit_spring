@@ -18,6 +18,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Convert;
 import static jakarta.persistence.FetchType.EAGER;
 import jakarta.validation.constraints.Email;
@@ -28,6 +29,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.nighthawk.spring_portfolio.mvc.csa_synergy.Grade;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 
 import lombok.AllArgsConstructor;
@@ -83,6 +85,10 @@ public class Person {
 
     @NotEmpty
     private String password;
+
+    @OneToMany(mappedBy="student")
+    private List<Grade> grades;
+
 
     /** name, dob are attributes to describe the person
      * --- @NonNull annotation is used to generate a constructor with AllArgsConstructor Lombox annotation.
