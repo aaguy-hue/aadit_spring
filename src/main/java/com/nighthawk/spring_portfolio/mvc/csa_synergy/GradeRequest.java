@@ -1,12 +1,11 @@
 package com.nighthawk.spring_portfolio.mvc.csa_synergy;
 
-import org.springframework.data.annotation.Id;
-
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotEmpty;

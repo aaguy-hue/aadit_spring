@@ -63,7 +63,9 @@ public class PersonApiController {
      */
     @GetMapping("/people")
     public ResponseEntity<List<Person>> getPeople() {
-        return new ResponseEntity<>( repository.findAllByOrderByNameAsc(), HttpStatus.OK);
+        List<Person> people = repository.findAllByOrderByNameAsc();
+        ResponseEntity<List<Person>> responseEntity = new ResponseEntity<>(people, HttpStatus.OK);
+        return responseEntity;
     }
 
     /**
