@@ -31,4 +31,8 @@ public class Grade {
         this.assignment = assignment;
         this.student = student;
     }
+
+    public static Grade createFromRequest(GradeRequest request) {
+        return new Grade(request.getGradeSuggestion(), request.getAssignment(), request.getStudent());
+    }
 }

@@ -22,18 +22,33 @@ public class GradeRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty
-    @OneToOne
-    private Grade grade;
-
+    private Boolean isAccepted;
+    
     private String explanation;
 
     @NotEmpty
-    @ManyToOne
-    private Person author;
+    @OneToOne
+    private Double gradeSuggestion;
 
-    public GradeRequest(Grade grade, Person author, String explanation) {
-        this.grade = grade;
+    @NotEmpty
+    @ManyToOne
+    private Person grader;
+    
+    @NotEmpty
+    @ManyToOne
+    private Person student;
+
+    @NotEmpty
+    @ManyToOne
+    private Assignment assignment;
+
+
+    public GradeRequest(Assignment assignment, Person student, Person grader, String explanation, Double gradeSuggestion) {
+        this.gradeSuggestion = gradeSuggestion;
         this.explanation = explanation;
+        this.grader = grader;
+        this.student = student;
+        this.assignment = assignment;
+        this.isAccepted = null;
     }
 }

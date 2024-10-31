@@ -61,6 +61,9 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToMany(mappedBy="student")
+    private List<Grade> grades;
+
     /** Many to Many relationship with PersonRole
      * --- @ManyToMany annotation is used to specify a many-to-many relationship between the entities.
      * --- FetchType.EAGER is used to specify that data must be eagerly fetched, meaning that it must be loaded immediately.
@@ -85,11 +88,8 @@ public class Person {
 
     @NotEmpty
     private String password;
-
-    @OneToMany(mappedBy="student")
-    private List<Grade> grades;
-
-
+    
+    
     /** name, dob are attributes to describe the person
      * --- @NonNull annotation is used to generate a constructor with AllArgsConstructor Lombox annotation.
      * --- @Size annotation is used to validate that the annotated field is between the specified boundaries, in this case between 2 and 30 characters.
@@ -101,7 +101,7 @@ public class Person {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
-
+    
     /** stats is used to store JSON for daily stat$
      * --- @JdbcTypeCode annotation is used to specify the JDBC type code for a column, in this case json.
      * --- @Column annotation is used to specify the mapped column for a persistent property or field, in this case columnDefinition is specified as jsonb.
@@ -146,8 +146,9 @@ public class Person {
      *  */ 
     public static Person createPerson(String name, String email, String password, String dob) {
         // By default, Spring Security expects roles to have a "ROLE_" prefix.
-        return createPerson(name, email, password, dob, Arrays.asList("ROLE_USER"));
+        return createPerson(name, email, password, dob, Arrays.asList("ROLE_USER", "ROLE_STUDENT"));
     }
+
     /** 2nd telescoping method to create a Person object with parameterized roles
      * @param roles 
      */
@@ -178,12 +179,12 @@ public class Person {
      */
     public static Person[] init() {
         ArrayList<Person> persons = new ArrayList<>();
-        persons.add(createPerson("Thomas Edison", "toby@gmail.com", "123toby", "01-01-1840", Arrays.asList("ROLE_ADMIN", "ROLE_USER", "ROLE_TESTER")));
+        persons.add(createPerson("Thomas Edison", "toby@gmail.com", "123toby", "01-01-1840", Arrays.asList("ROLE_ADMIN", "ROLE_USER", "ROLE_TESTER", "ROLE_STUDENT")));
         persons.add(createPerson("Alexander Graham Bell", "lexb@gmail.com", "123lex", "01-01-1847"));
         persons.add(createPerson("Nikola Tesla", "niko@gmail.com", "123niko", "01-01-1850"));
         persons.add(createPerson("Madam Currie", "madam@gmail.com", "123madam", "01-01-1860"));
         persons.add(createPerson("Grace Hopper", "hop@gmail.com", "123hop", "12-09-1906"));
-        persons.add(createPerson("John Mortensen", "jm1021@gmail.com", "123Qwerty!", "10-21-1959", Arrays.asList("ROLE_ADMIN")));
+        persons.add(createPerson("John Mortensen", "jm1021@gmail.com", "123Qwerty!", "10-21-1959", Arrays.asList("ROLE_ADMIN", "teacher")));
         return persons.toArray(new Person[0]);
     }
 
