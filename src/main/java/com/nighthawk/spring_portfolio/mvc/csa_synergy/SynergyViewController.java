@@ -32,7 +32,7 @@ public class SynergyViewController {
     @GetMapping("/edit-grades")
     public String editGrades(Model model) {
         List<Assignment> assignments = assignmentRepository.findAll();
-        List<Person> students = personRepository.findPeopleWithRole("STUDENT");
+        List<Person> students = personRepository.findPeopleWithRole("ROLE_STUDENT");
         List<Grade> gradesList = gradeRepository.findAll();
 
         Map<Long, Map<Long, Double>> grades = createGradesMap(gradesList, assignments, students);

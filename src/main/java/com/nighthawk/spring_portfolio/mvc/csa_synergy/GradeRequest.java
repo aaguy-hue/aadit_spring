@@ -27,7 +27,6 @@ public class GradeRequest {
     private String explanation;
 
     @NotEmpty
-    @OneToOne
     private Double gradeSuggestion;
 
     @NotEmpty
