@@ -2,19 +2,14 @@ package com.nighthawk.spring_portfolio.mvc.csa_synergy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.nighthawk.spring_portfolio.mvc.person.Person;
-import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 import com.nighthawk.spring_portfolio.mvc.person.PersonJpaRepository;
 
-import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 @Controller
 @RequestMapping("/api/synergy")
@@ -102,22 +97,12 @@ public class SynergyApiController {
                 HttpStatus.BAD_REQUEST, "Grade request was already accepted before"
             );
         }
-        
+
         request.setIsAccepted(false);
         gradeRequestRepository.save(request);
 
         return "redirect:/mvc/synergy/view-requests";
     }
-
-    // @PostMapping("/submit-grade-request")
-    // public String submitGradeRequest(
-    //     @RequestParam Integer assignmentId, 
-    //     @RequestParam Integer studentId,
-    //     @RequestParam Integer authorId,
-    //     @RequestParam 
-    // ) {
-
-    // }
 
     private boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");

@@ -2,6 +2,7 @@ package com.nighthawk.spring_portfolio.mvc.csa_synergy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,21 @@ public class SynergyViewController {
 
     @Autowired
     private PersonJpaRepository personRepository;
+
+    @GetMapping("/view-grades")
+    public String viewStudentGrades(@AuthenticationPrincipal Person student, Model model) {
+        List<Grade> grades = gradeRepository.findByStudent(student);
+        List<Assignment> assignments = assignmentRepository.findAll();
+    
+        Map<Long, Grade> assignmentGrades = new HashMap<>();
+        for (Grade grade : grades) {
+            assignmentGrades.put(grade.getAssignment().getId(), grade);
+        }
+    
+        model.addAttribute("assignments", assignments);
+        model.addAttribute("assignmentGrades", assignmentGrades);
+        return "synergy/view_student_grades";
+    }
 
     @GetMapping("/edit-grades")
     public String editGrades(Model model) {
@@ -64,7 +80,7 @@ public class SynergyViewController {
         return gradesMap;
     }
 
-    @PostMapping("/view-requests")
+    @GetMapping("/view-requests")
     public String viewRequests(Model model) {
         List<GradeRequest> requests = gradeRequestRepository.findAll();
         model.addAttribute("requests", requests);
