@@ -39,9 +39,11 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/synergy/update-grades").hasAnyRole("TEACHER", "ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/synergy/accept-request").hasAnyRole("TEACHER", "ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/synergy/reject-request").hasAnyRole("TEACHER", "ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/synergy/create-grade-request").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
                 .requestMatchers(HttpMethod.GET, "/mvc/synergy/edit-grades").hasAnyRole("TEACHER", "ADMIN")
                 .requestMatchers(HttpMethod.GET, "/mvc/synergy/view-requests").hasAnyRole("TEACHER", "ADMIN")
                 .requestMatchers(HttpMethod.GET, "/mvc/synergy/view-grades").hasRole("STUDENT")
+                .requestMatchers(HttpMethod.GET, "/mvc/synergy/create-grade-request").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
             )
             .cors(Customizer.withDefaults())
             .headers(headers -> headers

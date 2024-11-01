@@ -2,6 +2,7 @@ package com.nighthawk.spring_portfolio.mvc.csa_synergy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -51,6 +52,26 @@ public class SynergyApiController {
         }
 
         return "redirect:/mvc/synergy/edit-grades";
+    }
+    
+    @PostMapping("/create-grade-request")
+    public String createGradeRequest(@RequestParam Map<String, String> form,
+                                     @AuthenticationPrincipal Person grader) {
+        Long studentId = Long.valueOf(form.get("studentId"));
+        Long assignmentId = Long.valueOf(form.get("assignmentId"));
+        Double gradeSuggestion = Double.valueOf(form.get("gradeSuggestion"));
+        String explanation = form.get("explanation");
+    
+        Person student = personRepository.findById(studentId)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid student ID: " + studentId));
+        Assignment assignment = assignmentRepository.findById(assignmentId)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid assignment ID: " + assignmentId));
+        
+        // Create and save the GradeRequest
+        GradeRequest gradeRequest = new GradeRequest(assignment, student, grader, explanation, gradeSuggestion);
+        gradeRequestRepository.save(gradeRequest);
+
+        return "redirect:/mvc/synergy/create-grade-request";
     }
 
     @PostMapping("/accept-request")

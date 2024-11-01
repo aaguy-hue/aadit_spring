@@ -63,7 +63,7 @@ public class SynergyViewController {
     private Map<Long, Map<Long, Double>> createGradesMap(List<Grade> gradesList, List<Assignment> assignments, List<Person> students) {
         Map<Long, Map<Long, Double>> gradesMap = new HashMap<>();
 
-        // Default vals
+        // Ok so these are the default vals
         for (Assignment assignment : assignments) {
             gradesMap.put(assignment.getId(), new HashMap<>());
             for (Person student : students) {
@@ -85,5 +85,16 @@ public class SynergyViewController {
         List<GradeRequest> requests = gradeRequestRepository.findAll();
         model.addAttribute("requests", requests);
         return "synergy/view_grade_requests";
+    }
+
+    @GetMapping("/create-grade-request")
+    public String createGradeRequest(Model model) {
+        List<Assignment> assignments = assignmentRepository.findAll();
+        List<Person> students = personRepository.findPeopleWithRole("ROLE_STUDENT");
+
+        model.addAttribute("assignments", assignments);
+        model.addAttribute("students", students);
+
+        return "synergy/create_grade_request";
     }
 }

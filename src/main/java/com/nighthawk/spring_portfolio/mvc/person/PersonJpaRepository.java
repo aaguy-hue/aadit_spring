@@ -35,6 +35,7 @@ public interface PersonJpaRepository extends JpaRepository<Person, Long> {
     Person findByEmail(String email);
     List<Person> findAllByOrderByNameAsc();
     List<Person> findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(String name, String email);
+    Person findByName(String name);
     Person findByEmailAndPassword(String email, String password);
 
     /**
