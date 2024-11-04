@@ -83,6 +83,7 @@ public class SynergyViewController {
     @GetMapping("/view-requests")
     public String viewRequests(Model model) {
         List<GradeRequest> requests = gradeRequestRepository.findAll();
+        System.out.println("Fetched requests: " + requests);
         model.addAttribute("requests", requests);
         return "synergy/view_grade_requests";
     }

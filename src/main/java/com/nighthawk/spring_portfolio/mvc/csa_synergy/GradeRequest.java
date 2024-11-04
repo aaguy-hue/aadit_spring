@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,22 +23,23 @@ public class GradeRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Boolean isAccepted;
+    @NotNull
+    private Short status; // 0 = pending, 1 = accepted, 2 = rejected
     
     private String explanation;
 
-    @NotEmpty
+    @NotNull
     private Double gradeSuggestion;
 
-    @NotEmpty
+    @NotNull
     @ManyToOne
     private Person grader;
     
-    @NotEmpty
+    @NotNull
     @ManyToOne
     private Person student;
 
-    @NotEmpty
+    @NotNull
     @ManyToOne
     private Assignment assignment;
 
@@ -48,6 +50,18 @@ public class GradeRequest {
         this.grader = grader;
         this.student = student;
         this.assignment = assignment;
-        this.isAccepted = null;
+        this.status = 0;
+    }
+
+    public void accept() {
+        this.status = 1;
+    }
+
+    public void reject() {
+        this.status = 2;
+    }
+
+    public boolean isAccepted() {
+        return this.status == 1;
     }
 }
