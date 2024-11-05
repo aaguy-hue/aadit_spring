@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.csa_synergy;
+package com.nighthawk.spring_portfolio.mvc.synergy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

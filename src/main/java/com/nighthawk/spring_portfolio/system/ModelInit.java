@@ -14,11 +14,11 @@ import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 import com.nighthawk.spring_portfolio.mvc.person.PersonRole;
 import com.nighthawk.spring_portfolio.mvc.person.PersonRoleJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.synergy.Assignment;
+import com.nighthawk.spring_portfolio.mvc.synergy.AssignmentJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.synergy.GradeJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.announcement.Announcement;
 import com.nighthawk.spring_portfolio.mvc.announcement.AnnouncementJPA;
-import com.nighthawk.spring_portfolio.mvc.csa_synergy.Assignment;
-import com.nighthawk.spring_portfolio.mvc.csa_synergy.AssignmentJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.csa_synergy.GradeJpaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

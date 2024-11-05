@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.csa_synergy;
+package com.nighthawk.spring_portfolio.mvc.synergy;
 
 
 import com.vladmihalcea.hibernate.type.json.JsonType;

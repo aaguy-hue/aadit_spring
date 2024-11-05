@@ -29,7 +29,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.nighthawk.spring_portfolio.mvc.csa_synergy.Grade;
+import com.nighthawk.spring_portfolio.mvc.synergy.Grade;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 
 import lombok.AllArgsConstructor;
